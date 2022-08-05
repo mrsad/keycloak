@@ -51,11 +51,16 @@ public class YandexIdentityProvider extends AbstractOAuth2IdentityProvider<Yande
             throw new IllegalArgumentException("Hosted domain does not match.");
         }
         String login = getJsonProperty(profile, "login");
+        String username = login;
         if (login == null || login.trim().isEmpty()) {
-            user.setUsername(email);
-        } else {
-            user.setUsername(login);
+            username = email;
         }
+        // Strip domain from username if login contains domain and matched hosted domain.
+        if (domain != null && !domain.isEmpty() && username.endsWith("@" + domain)) {
+            int index = username.indexOf('@');
+            username = username.substring(0, index);
+        }
+        user.setUsername(username);
         user.setEmail(email);
         user.setFirstName(getJsonProperty(profile, "first_name"));
         user.setLastName(getJsonProperty(profile, "last_name"));

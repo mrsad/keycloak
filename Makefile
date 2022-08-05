@@ -1,12 +1,12 @@
 .PHONY: build start start-dev
 -include .env
-VERSION:=0.2.0
+VERSION:=0.9.10
 KC_DB?=postgres
 KC_DB_URL?=jdbc:postgresql://localhost/keycloak
 KC_DB_USERNAME?=keycloak
 KC_DB_PASSWORD?=keycloak
 KC_ARG?=""
-IMAGE="hub.adsw.io/library/keycloak-arenadata:17-${VERSION}"
+IMAGE="mrsad/keycloak:18-${VERSION}"
 build:
 	docker build --build-arg VERSION=${VERSION} -t ${IMAGE} .
 start start-dev: build

@@ -1,5 +1,5 @@
 ARG VERSION
-ARG KEYCLOAK_VERSION=17.0.1
+ARG KEYCLOAK_VERSION=18.0.2
 
 # Build extensions.
 FROM maven:3-openjdk-17 as builder
